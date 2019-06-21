@@ -13,6 +13,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--image_path', help='path of the image')
 parser.add_argument('--save_path', help='path of the augmented images to be saved')
 parser.add_argument('--ext', help='extension of images to be saved')
+
+
 def load_image(image):
 	img = imageio.imread(image)
 	return img
