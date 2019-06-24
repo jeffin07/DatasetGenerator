@@ -9,3 +9,8 @@ repo is if you are new to ML/DL and you need to experiment with your own data wh
 # How this works ?
 This is based on [imgaug](https://github.com/aleju/imgaug) which has huge features and good documentation.Here we only using some of them to generate a dataset and made it simple.
 This is in it's alpha version and need improvement
+
+# Sample Usage
+
+`python3 generator.py --image_path="/path_of_the/image.jpg" --save_path="/where_to_save" --ext=".jpg"
+`
