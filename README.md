@@ -12,5 +12,7 @@ This is in it's alpha version and need improvement
 
 # Sample Usage
 
+Use the branch alpha
+
 `python3 generator.py --image_path="/path_of_the/image.jpg" --save_path="/where_to_save" --ext=".jpg"
 `
