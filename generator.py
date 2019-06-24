@@ -11,6 +11,7 @@ ia.seed(4)
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--image_path', help='path of the image')
+parser.add_argument('--dir_path', help='path of the image')
 parser.add_argument('--save_path', help='path of the augmented images to be saved')
 parser.add_argument('--ext', help='extension of images to be saved')
 
@@ -27,13 +28,32 @@ def augment(img,save_dir):
 		image_aug = mul.augment_image(image_aug0)
 		# :/ need improvement
 		plt.imsave(os.path.join(save_dir,args.image_path.split("/")[-1].split(".")[0]+str(i)+str(args.ext)),image_aug)
-	
+
+def augment_dir():
+	check_structure_and_call(args.dir_path)
+	print("pass")
+
+def check_structure_and_call(dataset_path):
+	for i in os.listdir(dataset_path):
+		if not os.path.isdir(os.path.join(dataset_path,i)):
+			print("Folder structure not satisfied")
+			exit()
+	for i in os.listdir(os.path.join(dataset_path)):
+		for j in os.listdir(os.path.join(dataset_path,i)):
+			if not os.path.isfile(os.path.join(dataset_path,i,j)):
+				print("error inside catagory")
+	print("Passed Folder structure")
+
 
 
 args = parser.parse_args()
 if args.image_path == None:
-	exit()
+	if args.dir_path == None:
+		print("Image path cannot be empty :( ")
+		exit()
 
 
 if __name__ == "__main__":
-	augment(load_image(args.image_path),args.save_path)
+	# augment(load_image(args.image_path),args.save_path)
+	# check_structure_and_call(args.dir_path)
+	augment_dir()
