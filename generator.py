@@ -21,7 +21,7 @@ def load_image(image):
 	return img
 # 0.1 1
 def augment(img,save_dir):
-	for i in range(1):
+	for i in range(10):
 		rotate = iaa.Affine(rotate=(0, 0.1))
 		image_aug0 = rotate.augment_image(img)
 		mul = iaa.Multiply((0.8, 1))
@@ -31,7 +31,12 @@ def augment(img,save_dir):
 
 def augment_dir():
 	check_structure_and_call(args.dir_path)
-	print("pass")
+	print("{} categories found".format(len(os.listdir(args.dir_path))))
+	for cats in os.listdir(args.dir_path):
+		if os.listdir(os.path.join(args.dir_path,cats)) == []:
+			print("No images found in {} skipping :( ".format(cats))
+		for f in os.listdir(os.path.join(args.dir_path,cats)):
+			print(f)
 
 def check_structure_and_call(dataset_path):
 	for i in os.listdir(dataset_path):
@@ -42,7 +47,8 @@ def check_structure_and_call(dataset_path):
 		for j in os.listdir(os.path.join(dataset_path,i)):
 			if not os.path.isfile(os.path.join(dataset_path,i,j)):
 				print("error inside catagory")
-	print("Passed Folder structure")
+				exit()
+	print("Passed Folder structure :) ")
 
 
 
@@ -52,6 +58,7 @@ if args.image_path == None:
 		print("Image path cannot be empty :( ")
 		exit()
 
+# sample usage python3 generator.py --dir_path=/path/to/dataset
 
 if __name__ == "__main__":
 	# augment(load_image(args.image_path),args.save_path)
