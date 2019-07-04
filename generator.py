@@ -22,7 +22,7 @@ def load_image(image):
 # 0.1 1
 def augment(img,save_dir):
 	for i in range(10):
-		rotate = iaa.Affine(rotate=(0, 0.1))
+		rotate = iaa.Affine(rotate=(0, 0.3))
 		image_aug0 = rotate.augment_image(img)
 		mul = iaa.Multiply((0.8, 1))
 		image_aug = mul.augment_image(image_aug0)
@@ -36,7 +36,10 @@ def augment_dir():
 		if os.listdir(os.path.join(args.dir_path,cats)) == []:
 			print("No images found in {} skipping :( ".format(cats))
 		for f in os.listdir(os.path.join(args.dir_path,cats)):
-			print(f)
+			# :/ need thinking
+			args.image_path = os.path.join(args.dir_path,cats,f)
+			args.ext = ".jpg"
+			augment(load_image(os.path.join(args.dir_path,cats,f)),os.path.join(args.dir_path,cats))
 
 def check_structure_and_call(dataset_path):
 	for i in os.listdir(dataset_path):
